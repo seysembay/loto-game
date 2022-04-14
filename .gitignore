@@ -7,3 +7,4 @@ env.bak/
 venv.bak/
 .idea
 data.txt
+__pycache__/
