@@ -1,37 +1,34 @@
-import random
 from player import Player
 from card import Card
 from barrel import Barrel
+from constants import TOBE, HU
 
 
 def main():
     barrel = Barrel()
-    player1 = Player(Card(), 1)
-    player2 = Player(Card(), 2)
-
+    player_count = int(input("Введите количество игроков: "))
+    players = []
+    for player_num in range(player_count):
+        players.append(Player(Card(), player_num+1))
     i = 1
     while True:
         barrel_num = barrel.get_next_val()
         print('----------------------------------------')
         print(f"Новый бочонок: {barrel_num} (осталось {90 - i})")
+        end = False
         i += 1
-        player1.show_info()
-        if player1.type_player == 'hu':
-            winner = player1.check_hu(barrel_num, input("зачеркнуть (y/n): "))
-        else:
-            winner = player1.check_ai(barrel_num)
-        if winner != 'to be':
-            print(winner)
-            break
-        else:
-            player2.show_info()
-            if player2.type_player == 'hu':
-                winner = player2.check_hu(barrel_num, input("зачеркнуть (y/n): "))
+        for player in players:
+            player.show_info()
+            if player.type_player == HU:
+                winner = player.check_hu(barrel_num, input("зачеркнуть (y/n): "))
             else:
-                winner = player2.check_ai(barrel_num)
-            if winner != 'to be':
+                winner = player.check_ai(barrel_num)
+            if winner != TOBE:
                 print(winner)
+                end = True
                 break
+        if end:
+            break
 
 
 if __name__ == '__main__':

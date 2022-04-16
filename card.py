@@ -6,7 +6,7 @@ class Card:
     def __init__(self):
         self.card_items = []
         self.positions = []
-        data = random.sample(range(1, 20), 15)
+        data = random.sample(range(1, 90), 15)
         self.split(data, 3)
         lol = lambda lst, sz: [lst[i:i + sz] for i in range(0, len(lst), sz)]
         for i in range(3):

@@ -1,19 +1,18 @@
 import random
 from card import Card
-from barrel import Barrel
+from constants import TYPES, TOBE, AI, HU
 
 
 class Player:
     def __init__(self, card: Card, number: int):
         self.number = number
         self.count_checked_items = 0
-        types = ["ai", "hu"]
         player_names = ['Tor', 'Cap', 'Vanda', 'Hulk', 'Suren']
         player_type = input(f"Выберите тип игрока N{self.number} (ai/hu): ")
-        if player_type not in types:
+        if player_type not in TYPES:
             print("Некорректный тип игрока!")
             return
-        elif player_type == "ai":
+        elif player_type == AI:
             player_name = random.choice(player_names)
         else:
             player_name = input(f"Введите имя игрока N{self.number}: ")
@@ -41,9 +40,9 @@ class Player:
         if self.count_checked_items == 15:
             return f"winner {self.name}"
         if checked:
-            return "to be" if answer == 'y' else f"loser {self.name}"
+            return TOBE if answer == 'y' else f"loser {self.name}"
         else:
-            return "to be" if answer == 'n' else f"loser {self.name}"
+            return TOBE if answer == 'n' else f"loser {self.name}"
 
     def check_ai(self, num_check: int):
         for iter_index in range(3):
@@ -53,7 +52,7 @@ class Player:
                 self.count_checked_items += 1
         if self.count_checked_items == 15:
             return f"winner {self.name}"
-        return "to be"
+        return TOBE
 
 
 if __name__ == '__main__':
